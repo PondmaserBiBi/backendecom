@@ -12,13 +12,23 @@ app.use(morgan('dev'))
 app.use(express.json({ limit: '20mb' }))
 
 app.use(cors({
-  origin: '*',  // อนุญาตทุก origin
-  credentials: false
+    origin: '*',  // อนุญาตทุก origin
+    credentials: false
 }))
 
 
 readdirSync('./routes')
     .map((c) => app.use('/', require('./routes/' + c)))
+
+
+app.get('/', (req, res) => {
+
+    res.json({
+        success: true,
+        message: 'Backend API is running'
+
+    });
+});
 
 
 
